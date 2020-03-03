@@ -54,7 +54,7 @@ class BST:
 		return currNode
 
 	# finds the maximum Node value in the BST
-	def findMaxIter(self):
+	def findMaxIter(self) -> Node:
 		# currNode = root
 		currNode = self.root
 		# while right child isnt null
