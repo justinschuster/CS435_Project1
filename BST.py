@@ -13,20 +13,21 @@ class BST:
 			# currData = data of the currNode
 			currData = currNode.data
 			# if currData = data
-			if (data == currData or currData == None):
+			if (data == currData or currData == None):	
 				currNode.data = data
 				# return	
 				return
 			# if data < currData 
 			if (data < currData):
 				# currNode = left child of currnode 
+				currNode.left = Node.Node(data)
 				currNode = currNode.left
 			# if data > currData
-			if (data > currData):
+			elif (data > currData):
 				# currNode = rght child of currNode
 				currNode = currNode.right 
 		# currNode = new Node(data)
-		currNode = Node(data)
+		currNode = Node.Node(data)
 
 	# deletes Node from BST
 	def deleteIter():
@@ -55,13 +56,11 @@ class BST:
 	def findMaxIter():
 		return 
 
-	def printBST(self, visited: []) -> None:
-		print(self.root.data)
-		visited.append(self.root.data)
-		if self.root.left is not None:
-			print(self.root.right.data)
-			self.printBST(self.root.left, visited)
-		if self.root.right is not None:
-			print(self.root.right.data)
-			self.printBST(self.root.right, visited)
+	def printBST(self, root: Node, visited: []) -> None:
+		print(root.data)
+		visited.append(root.data)
+		if (root.left is not None and root.left not in visited):
+			self.printBST(root.left, visited)
+		if (root.right is not None and root.right not in visited):	
+			self.printBST(root.right, visited)
 		return 
