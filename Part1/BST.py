@@ -5,30 +5,45 @@ class BST:
 		self.root = Node.Node()
 
 	# inserts Node into BST
-	def insertIter(self, root: Node, data: int) -> None:
+	def insertIter(self, data: int) -> None:
 		# Set currNode = root
-		currNode = root
+		currNode = self.root
+		prevRight = None
+		prevLeft = None
+		print("number to insert: " + str(data))
+
 		# while currNode isn't null
-		while currNode is not None:
+		while (currNode != None):
+			print("currNode " + str(currNode))
 			# currData = data of the currNode
-			currData = currNode.data
+
 			# if currData = data
-			if (data == currData or currData == None):	
+			if (data == currNode.data or currNode.data is None):	
 				currNode.data = data
-				# return	
 				return
+
 			# if data < currData 
-			if (data < currData):
+			if (data < currNode.data):
 				# currNode = left child of currnode 
-				currNode.left = Node.Node(data)
+				#print(currNode.left)
+				prevRight = None 
+				prevLeft = currNode
 				currNode = currNode.left
+		
 			# if data > currData
-			elif (data > currData):
-				# currNode = rght child Af currNode
-				currNode.right = Node.Node(data)
-				currNode = currNode.right 
-		# currNode = new Node(data)
-		# currNode = Node.Node(data)
+			elif (data > currNode.data):
+				#print("data > currData")
+				#print("right child: " + str(currNode.right))
+				prevLeft = None
+				prevRight = currNode
+				currNode = currNode.right
+
+		currNode = Node.Node(data)
+		if (prevRight):
+			prevRight.right = currNode
+		elif (prevLeft):
+			prevLeft.left = currNode
+
 
 	# deletes Node from BST
 	def deleteIter(self, deleteValue: int) -> None:
