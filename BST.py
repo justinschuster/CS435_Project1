@@ -44,14 +44,15 @@ class BST:
 		while currNode is not None:
 			# if currNode value is equal to the value we want to delete -> delete
 			if (currNode.data == deleteValue):
-				# delete target Node when there is no children
-				if (currNode.left is None and currNode.right is None):
-					# assign None follow to proper prevNode child 
-					if (prevNode.left.data == deleteValue):
+				# assign sub tree to proper prevNode child
+				if (prevNode.left.data == deleteValue):
+					# delete target Node when there is no children
+					if (currNode.left is None and currNode.right is None):
 						prevNode.left = None
-					elif (prevNode.right.data == deleteValue):
+				elif (prevNode.right.data == deleteValue):
+					if (currNode.left is None and currNode.right is None):
 						prevNode.right = None
-				break
+
 			prevNode = currNode # prevNode = current node  
 			# if delete value is less that data of current
 			if (currNode.data > deleteValue):
