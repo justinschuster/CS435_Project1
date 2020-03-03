@@ -6,7 +6,8 @@
 import BST
 
 def main():
-	print("main")
+	currTree = BST.BST()
+	currTree.insertIter(currTree.root, 3)
 
 if __name__ == "__main__":
 	main()

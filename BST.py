@@ -5,11 +5,28 @@ class BST:
 		self.root = Node.Node()
 
 	# inserts Node into BST
-	def insertIter(self, root: Node) -> None:
-		# if node is null
-			# return new data node 
-		# Set (L|R) child = insertIter(valu)
-		return
+	def insertIter(self, root: Node, data: int) -> None:
+		# Set currNode = root
+		currNode = root
+		# while currNode isn't null
+		while currNode is not None:
+			# currData = data of the currNode
+			currData = currNode.data
+			# if currData = data
+			if (data == currData or currData == None):
+				currNode.data = data
+				# return	
+				return
+			# if data < currData 
+			if (data < currData):
+				# currNode = left child of currnode 
+				currNode = currNode.left
+			# if data > currData
+			if (data > currData):
+				# currNode = rght child of currNode
+				currNode = currNode.right 
+		# currNode = new Node(data)
+		currNode = Node(data)
 
 	# deletes Node from BST
 	def deleteIter():
@@ -26,7 +43,7 @@ class BST:
 	# finds the minimum Node value in the BST
 	def findMinIter():
 		return 
-		
+
 	# finds the maximum Node value in the BST
 	def findMaxIter():
 		return 
