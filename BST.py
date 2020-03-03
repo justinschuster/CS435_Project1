@@ -54,3 +54,14 @@ class BST:
 	# finds the maximum Node value in the BST
 	def findMaxIter():
 		return 
+
+	def printBST(self, visited: []) -> None:
+		print(self.root.data)
+		visited.append(self.root.data)
+		if self.root.left is not None:
+			print(self.root.right.data)
+			self.printBST(self.root.left, visited)
+		if self.root.right is not None:
+			print(self.root.right.data)
+			self.printBST(self.root.right, visited)
+		return 

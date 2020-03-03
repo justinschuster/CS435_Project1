@@ -9,5 +9,8 @@ def main():
 	currTree = BST.BST()
 	currTree.insertIter(currTree.root, 3)
 
+	visited = []
+	currTree.printBST(visited)
+
 if __name__ == "__main__":
 	main()
