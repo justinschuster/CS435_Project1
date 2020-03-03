@@ -40,9 +40,16 @@ class BST:
 	def findPrevIter():
 		return
 
-	# finds the minimum Node value in the BST
-	def findMinIter():
-		return 
+	# finds the minimum Node value in the subtree
+	def findMinIter(root: Node) -> Node:
+		# currNode = root
+		currNode = root 
+		# while left child of current node is not null
+		while currNode.leftChild is not None:
+			# currNode = left child 
+			currNode = currNode.left
+		# return the currNode when we have no more left children
+		return currNode
 
 	# finds the maximum Node value in the BST
 	def findMaxIter():
