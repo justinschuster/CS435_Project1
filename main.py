@@ -8,10 +8,12 @@ import BST
 def main():
 	currTree = BST.BST()
 	currTree.insertIter(currTree.root, 3)
-	currTree.insertIter(currTree.root, 2)
+	currTree.insertIter(currTree.root, 2)	
+	currTree.insertIter(currTree.root, 4)
+	print(currTree.findMinIter().data)
 
-	visited = []
-	currTree.printBST(currTree.root, visited)
+	#visited = []
+	#currTree.printBST(currTree.root, visited)
 
 if __name__ == "__main__":
 	main()

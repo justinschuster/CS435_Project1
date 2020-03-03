@@ -43,11 +43,11 @@ class BST:
 		return
 
 	# finds the minimum Node value in the subtree
-	def findMinIter(root: Node) -> Node:
+	def findMinIter(self) -> Node:
 		# currNode = root
-		currNode = root 
+		currNode = self.root 
 		# while left child of current node is not null
-		while currNode.leftChild is not None:
+		while currNode.left is not None:
 			# currNode = left child 
 			currNode = currNode.left
 		# return the currNode when we have no more left children
