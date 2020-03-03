@@ -10,13 +10,9 @@ class BST:
 		currNode = self.root
 		prevRight = None
 		prevLeft = None
-		print("number to insert: " + str(data))
 
 		# while currNode isn't null
 		while (currNode != None):
-			print("currNode " + str(currNode))
-			# currData = data of the currNode
-
 			# if currData = data
 			if (data == currNode.data or currNode.data is None):	
 				currNode.data = data
@@ -25,15 +21,11 @@ class BST:
 			# if data < currData 
 			if (data < currNode.data):
 				# currNode = left child of currnode 
-				#print(currNode.left)
 				prevRight = None 
 				prevLeft = currNode
-				currNode = currNode.left
-		
+				currNode = currNode.left	
 			# if data > currData
 			elif (data > currNode.data):
-				#print("data > currData")
-				#print("right child: " + str(currNode.right))
 				prevLeft = None
 				prevRight = currNode
 				currNode = currNode.right
@@ -88,3 +80,12 @@ class BST:
 	# finds the previous Node in BST
 	def findPrevIter():
 		return
+
+	def printPreorder(self, root: Node, visited: []) -> None:
+		print(root.data)
+		visited.append(root.data)
+		if (root.left is not None and root.right not in visited):
+			self.printPreorder(root.left, visited)
+		if (root.right is not None and root.right not in visited):	
+			self.printPreorder(root.right, visited)
+		return 
