@@ -31,7 +31,35 @@ class BST:
 		# currNode = Node.Node(data)
 
 	# deletes Node from BST
-	def deleteIter():
+	def deleteIter(self, deleteValue: int) -> None:
+		prevNode = None # set prevNode = none
+		currNode =  self.root # set currNode = root 
+
+		# if root is null
+		if  currNode is None:
+			# return 
+			return
+
+		# while currNode is not null
+		while currNode is not None:
+			# if currNode value is equal to the value we want to delete -> delete
+			if (currNode.data == deleteValue):
+				# delete target Node when there is no children
+				if (currNode.left is None and currNode.right is None):
+					# assign None follow to proper prevNode child 
+					if (prevNode.left.data == deleteValue):
+						prevNode.left = None
+					elif (prevNode.right.data == deleteValue):
+						prevNode.right = None
+				break
+			prevNode = currNode # prevNode = current node  
+			# if delete value is less that data of current
+			if (currNode.data > deleteValue):
+				# make currNode into currNode's left child
+				currNode = currNode.left
+			# otherwise make currNode into currNodes right child
+			else:
+				currNode = currNode.right 
 		return
 
 	# finds next Node in BST 
