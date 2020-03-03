@@ -24,10 +24,11 @@ class BST:
 				currNode = currNode.left
 			# if data > currData
 			elif (data > currData):
-				# currNode = rght child of currNode
+				# currNode = rght child Af currNode
+				currNode.right = Node.Node(data)
 				currNode = currNode.right 
 		# currNode = new Node(data)
-		currNode = Node.Node(data)
+		# currNode = Node.Node(data)
 
 	# deletes Node from BST
 	def deleteIter():
