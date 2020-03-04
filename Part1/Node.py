@@ -23,13 +23,3 @@ class Node:
 			currNode = currNode.right
 		# return the currNode when have have no more right children
 		return currNode	
-
-
-	def preOrder(self, visited: []) -> None:
-		print(self.data)
-		visited.append(self.data)
-		if (self.left is not None and self.right not in visited):
-			self.left.preOrder(visited)
-		if (self.right is not None and self.right not in visited):	
-			self.right.preOrder(visited)
-		return 
