@@ -1,9 +1,10 @@
 class Node:
-	def __init__(self, data = None):
-		self.data = data
+	def __init__(self, data=None):
 		self.left = None
 		self.right = None 
+		self.data = data
 
+		
 	# finds the minimum Node value in the subtree
 	def findMinIter(self):
 		currNode = self
@@ -31,3 +32,22 @@ class Node:
 	# finds the max Node value in the subtree (recursive)
 	def findMaxRec():
 		return
+
+	# inserts Node into BST (recursive version)
+	def insertRec(self, data):
+		root = self
+		if  root is None: # base case 
+			root = Node(data)
+		elif root.data is None:
+			root.data = data
+		else:
+			if data == root.data:
+				root.data = data 
+			elif data < root.data: # smaller number to left child	
+				if root.left is None:
+					root.left = Node()
+				root.left.insertRec(data)	
+			else: # larger number to the right
+				if root.right is None:
+					root.right = Node()
+				root.right.insertRec(data)

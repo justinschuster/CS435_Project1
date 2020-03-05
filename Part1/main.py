@@ -3,24 +3,36 @@
 #	Project 1
 #	BST methods implementation
 
-import BST
+from BST import BST
+from Node import Node
 
-def main():
-	currTree = BST.BST()
-	currTree.insertIter(currTree.root, 1)
-	currTree.insertIter(currTree.root, 5)	
-	currTree.insertIter(currTree.root, 4)
-	currTree.insertIter(currTree.root, 3)
+# helper function to print out preorder traversal for testing
+def printPreorder(root: Node, visited: []) -> None:
+	if root is None or root.data is None:
+		return
 
-	print(currTree.root.data)
-	print(currTree.root.right.data)
-	print(currTree.root.right.left.data)
-	print(currTree.root.right.left.left.data)
+	print(root.data)
+	visited.append(root.data)
+
+	if (root.left is not None and root.right not in visited):
+		printPreorder(root.left, visited)
+	if (root.right is not None and root.right not in visited):	
+		printPreorder(root.right, visited)
+	return 
+
+
+def main() -> None:
+	currTree = BST()
+	currTree.insertRec(5)	
+	currTree.insertRec(4)
+	#currTree.insertIter(3)
 
 	#currTree.deleteIter(2)
+	#currTree.insertIter(1)
 
+	print("\nPreorder Traversal:")
 	visited = []
-	#currTree.root.preOrder(visited)
+	printPreorder(currTree.root, visited)
 
 if __name__ == "__main__":
 	main()

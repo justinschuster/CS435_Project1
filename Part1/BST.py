@@ -1,12 +1,8 @@
-import Node
+from Node import Node
 
 class BST:
 	def __init__(self) -> None:
-		self.root = Node.Node()
-
-	# inserts Node into BST (recursive version)
-	def insertRec(self, data: int) -> None:
-		return
+		self.root = Node()
 
 	# inserts Node into BST (iterative version)
 	def insertIter(self, data: int) -> None:
@@ -98,11 +94,19 @@ class BST:
 		return
 
 	# helper function to print out preorder traversal for testing
-	def printPreorder(self, root: Node, visited: []) -> None:
+	def printPreorder(root: Node, visited: []) -> None:
+		if root is None or root.data is None:
+			return
+
 		print(root.data)
 		visited.append(root.data)
+
 		if (root.left is not None and root.right not in visited):
 			self.printPreorder(root.left, visited)
 		if (root.right is not None and root.right not in visited):	
 			self.printPreorder(root.right, visited)
 		return 
+
+	def insertRec(self, data: int) -> None:
+		self.root.insertRec(data)
+		return
