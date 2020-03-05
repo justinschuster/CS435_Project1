@@ -4,6 +4,14 @@ class Node:
 		self.right = None 
 		self.data = data
 
+	# finds the minimum Node value in the subtree (recursive)
+	def findMinRec(self):
+		currNode = self
+		if currNode.left is None:
+			return currNode 
+		else:
+			return currNode.left.findMinRec()
+
 		
 	# finds the minimum Node value in the subtree
 	def findMinIter(self):
@@ -14,10 +22,6 @@ class Node:
 			currNode = currNode.left
 		# return the currNode when we have no more left children
 		return currNode
-
-	# finds the minimum Node value in the subtree (recursive)
-	def findMinRec():
-		return
 
 	# finds the maximum Node value in the sub tree
 	def findMaxIter(self):

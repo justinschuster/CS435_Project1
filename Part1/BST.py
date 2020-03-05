@@ -73,10 +73,6 @@ class BST:
 				currNode = currNode.right 
 		return
 
-	# deletes Node from BST (recursive version)
-	def deleteRec():
-		return
-
 	# finds next Node in BST 
 	def findNextIter():
 		return
@@ -93,20 +89,11 @@ class BST:
 	def findPrevRec():
 		return
 
-	# helper function to print out preorder traversal for testing
-	def printPreorder(root: Node, visited: []) -> None:
-		if root is None or root.data is None:
-			return
-
-		print(root.data)
-		visited.append(root.data)
-
-		if (root.left is not None and root.right not in visited):
-			self.printPreorder(root.left, visited)
-		if (root.right is not None and root.right not in visited):	
-			self.printPreorder(root.right, visited)
-		return 
-
+	# inserts Node in to BST (recursive)
 	def insertRec(self, data: int) -> None:
 		self.root.insertRec(data)
+		return
+
+	# deletes Node from BST (recursive version)
+	def deleteRec():
 		return
