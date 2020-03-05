@@ -94,6 +94,7 @@ class BST:
 		self.root.insertRec(data)
 		return
 
-	# deletes Node from BST (recursive version)
-	def deleteRec():
-		return
+	# deletes node from bst (recursive version)
+	def deleteRec(self, data: int) -> None:
+		self.root.deleteRec(data)
+		return	

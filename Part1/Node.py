@@ -55,3 +55,18 @@ class Node:
 				if root.right is None:
 					root.right = Node()
 				root.right.insertRec(data)
+
+	# deletes Node in BST recursively
+	def deleteRec(self, data, prevNode = None):
+		if data < self.data:
+			print("going left")
+			self.left.deleteRec(data, self)
+			return
+		elif data > self.data:
+			self.right.deleteRec(data, self)
+			return
+		elif data == self.data:
+			self = None 	
+			if prevNode is not None:
+				prevNode.left = self
+			return
