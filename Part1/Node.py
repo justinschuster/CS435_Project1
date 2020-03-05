@@ -14,6 +14,10 @@ class Node:
 		# return the currNode when we have no more left children
 		return currNode
 
+	# finds the minimum Node value in the subtree (recursive)
+	def findMinRec():
+		return
+
 	# finds the maximum Node value in the sub tree
 	def findMaxIter(self):
 		currNode = self
@@ -23,3 +27,7 @@ class Node:
 			currNode = currNode.right
 		# return the currNode when have have no more right children
 		return currNode	
+
+	# finds the max Node value in the subtree (recursive)
+	def findMaxRec():
+		return

@@ -4,7 +4,11 @@ class BST:
 	def __init__(self) -> None:
 		self.root = Node.Node()
 
-	# inserts Node into BST
+	# inserts Node into BST (recursive version)
+	def insertRec(self, data: int) -> None:
+		return
+
+	# inserts Node into BST (iterative version)
 	def insertIter(self, data: int) -> None:
 		# Set currNode = root
 		currNode = self.root
@@ -37,7 +41,7 @@ class BST:
 			prevLeft.left = currNode
 
 
-	# deletes Node from BST
+	# deletes Node from BST (iterative version)
 	def deleteIter(self, deleteValue: int) -> None:
 		prevNode = None # set prevNode = none
 		currNode =  self.root # set currNode = root 
@@ -73,14 +77,27 @@ class BST:
 				currNode = currNode.right 
 		return
 
+	# deletes Node from BST (recursive version)
+	def deleteRec():
+		return
+
 	# finds next Node in BST 
 	def findNextIter():
+		return
+
+	# finds next Node in BST (recursive)
+	def findNextRec():
 		return
 
 	# finds the previous Node in BST
 	def findPrevIter():
 		return
 
+	# finds the previous Node in the BST (recursive)
+	def findPrevRec():
+		return
+
+	# helper function to print out preorder traversal for testing
 	def printPreorder(self, root: Node, visited: []) -> None:
 		print(root.data)
 		visited.append(root.data)
