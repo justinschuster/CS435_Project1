@@ -78,6 +78,26 @@ def findPrevRec(root, data, prevNode=None):
 
 	return prevNode
 
+# finds the previous node inoder (iterative)
+def findPrevIter(root, data):
+	prevNode = Node()
+
+	while True:
+		if data > root.data:
+			prevNode = root 
+			root = root.right
+		elif data < root.data:
+			root = root.left
+		else:
+			if root.left is not None:
+				prevNode = root.left.findMaxIter();
+			break
+
+		if root is None:
+			return None
+
+	return prevNode
+
 
 def main() -> None:
 	currTree = BST()
@@ -89,7 +109,7 @@ def main() -> None:
 	currTree.insertRec(16)
 	currTree.insertRec(25)
 
-	print(findPrevRec(currTree.root, 20).data)
+	print(findPrevIter(currTree.root, 20).data)
 
 	#deleteRec(currTree.root, 4)
 
