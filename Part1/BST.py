@@ -72,23 +72,7 @@ class BST:
 			else:
 				currNode = currNode.right 
 		return
-
-	# finds next Node in BST 
-	def findNextIter():
-		return
-
-	# finds next Node in BST (recursive)
-	def findNextRec():
-		return
-
-	# finds the previous Node in BST
-	def findPrevIter():
-		return
-
-	# finds the previous Node in the BST (recursive)
-	def findPrevRec():
-		return
-
+		
 	# inserts Node in to BST (recursive)
 	def insertRec(self, data: int) -> None:
 		self.root.insertRec(data)

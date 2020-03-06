@@ -46,22 +46,40 @@ def deleteRec(root, data):
 
 	return root
 
+# finds the next node inorder
+def findNextRec(root, data, prevNode=None):
+	if root is None:
+		return None
+
+	if root.data == data:
+		if root.right is not None:
+			return root.right.findMinRec()
+	elif data < root.data:
+		prevNode = root
+		return findNextRec(root.left, data, prevNode)
+	else:
+		return findNextRec(root.right, data, prevNode)
+
+	return prevNode
+
 
 def main() -> None:
 	currTree = BST()
-	currTree.insertRec(5)	
-	currTree.insertRec(4)
-	currTree.insertRec(3)
-	currTree.insertRec(6)
+	currTree.insertRec(15)	
+	currTree.insertRec(10)
+	currTree.insertRec(8)
+	currTree.insertRec(12)
+	currTree.insertRec(20)
+	currTree.insertRec(16)
+	currTree.insertRec(25)
 
-	#minNode = currTree.root.findMinRec()
-	#print(minNode.data)
-	deleteRec(currTree.root, 4)
+	print(findNextRec(currTree.root, 8).data)
 
-
+	#deleteRec(currTree.root, 4)
 
 	#currTree.deleteIter(2)
 	#currTree.insertIter(1)
+
 
 	print("\nPreorder Traversal:")
 	visited = []
