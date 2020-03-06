@@ -78,6 +78,26 @@ def findPrevRec(root, data, prevNode=None):
 
 	return prevNode
 
+# finds next node inorder (iterative)
+def findNextIter(root, data):
+	prevNode = Node()
+
+	while True:
+		if data > root.data:
+			root = root.right
+		elif data < root.data:
+			prevNode = root
+			root = root.left
+		else:
+			if root.right is not None:
+				prevNode = root.right.findMinIter()
+			break
+
+		if root is None:
+			return None
+
+	return prevNode 
+
 # finds the previous node inoder (iterative)
 def findPrevIter(root, data):
 	prevNode = Node()
@@ -109,7 +129,7 @@ def main() -> None:
 	currTree.insertRec(16)
 	currTree.insertRec(25)
 
-	print(findPrevIter(currTree.root, 20).data)
+	print(findNextIter(currTree.root, 10).data)
 
 	#deleteRec(currTree.root, 4)
 
