@@ -12,6 +12,14 @@ class Node:
 		else:
 			return currNode.left.findMinRec()
 
+	# finds the max Node value in the subtree (recursive)
+	def findMaxRec(self):
+		currNode = self
+		if currNode.right is None:
+			return currNode
+		else:
+			return currNode.right.findMaxRec()
+
 		
 	# finds the minimum Node value in the subtree
 	def findMinIter(self):
@@ -33,10 +41,6 @@ class Node:
 		# return the currNode when have have no more right children
 		return currNode	
 
-	# finds the max Node value in the subtree (recursive)
-	def findMaxRec():
-		return
-
 	# inserts Node into BST (recursive version)
 	def insertRec(self, data):
 		root = self
@@ -56,17 +60,26 @@ class Node:
 					root.right = Node()
 				root.right.insertRec(data)
 
-	# deletes Node in BST recursively
-	def deleteRec(self, data, prevNode = None):
-		if data < self.data:
-			print("going left")
-			self.left.deleteRec(data, self)
-			return
-		elif data > self.data:
-			self.right.deleteRec(data, self)
-			return
-		elif data == self.data:
-			self = None 	
-			if prevNode is not None:
-				prevNode.left = self
-			return
+# deletes Node in BST recursively
+def deleteRec(self, data):
+	if data < self.data:
+		print("going left")
+		return self.left.deleteRec(data)	
+	elif data > self.data:
+		return self.right.deleteRec(data)
+	elif data == self.data:
+		if self.left is None and self.right is None: # Node to delete is a leaf
+			self = None
+			return self
+		elif self.left is not None and self.right is None: # 1 child
+			childNode = self.left
+			self = childNode
+			return self
+		elif self.left is None and self.right is not None: # only right child exits
+			childNode = self.right
+			self = childNode
+			return self
+
+		temp = self.right.findMinRec() 
+		self.data = temp.data
+		self.right = self.right.deleteRec(temp.data)

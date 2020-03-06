@@ -20,12 +20,45 @@ def printPreorder(root: Node, visited: []) -> None:
 		printPreorder(root.right, visited)
 	return 
 
+# deletes Node in BST recursively
+def deleteRec(root, data):
+	if data < root.data:
+		print("going left")
+		root.left = deleteRec(root.left, data)	
+	elif data > root.data:
+		root.right = deleteRec(root.right, data)
+	elif data == root.data:
+		if root.left is None and root.right is None: # Node to delete is a leaf
+			root = None
+			return root
+		elif root.left is not None and root.right is None: # 1 child
+			childNode = root.left
+			root = childNode
+			return root
+		elif root.left is None and root.right is not None: # only right child exits
+			childNode = root.right
+			root = childNode
+			return root
+
+		temp = root.right.findMinRec() 
+		root.data = temp.data
+		root.right = deleteRec(root.right, temp.data)
+
+	return root
+
 
 def main() -> None:
 	currTree = BST()
 	currTree.insertRec(5)	
 	currTree.insertRec(4)
-	#currTree.insertIter(3)
+	currTree.insertRec(3)
+	currTree.insertRec(6)
+
+	#minNode = currTree.root.findMinRec()
+	#print(minNode.data)
+	deleteRec(currTree.root, 4)
+
+
 
 	#currTree.deleteIter(2)
 	#currTree.insertIter(1)
