@@ -62,6 +62,22 @@ def findNextRec(root, data, prevNode=None):
 
 	return prevNode
 
+# finds the previous node inorder (recursive)
+def findPrevRec(root, data, prevNode=None):
+	if root is None:
+		return prevNode
+
+	if data == root.data:
+		if root.left is not None:
+			return root.left.findMaxRec()
+	elif data < root.data:
+		return findPrevRec(root.left, data, prevNode)
+	else:
+		prevNode = root
+		return findPrevRec(root.right, data, prevNode)
+
+	return prevNode
+
 
 def main() -> None:
 	currTree = BST()
@@ -73,7 +89,7 @@ def main() -> None:
 	currTree.insertRec(16)
 	currTree.insertRec(25)
 
-	print(findNextRec(currTree.root, 8).data)
+	print(findPrevRec(currTree.root, 20).data)
 
 	#deleteRec(currTree.root, 4)
 
