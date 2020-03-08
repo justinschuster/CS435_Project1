@@ -5,32 +5,59 @@ class AVL:
 		self.root = Node.Node()
 
 	# rebalance at a node violating the rank rule
-	def rebalanceAVL(self, value):
+	def rebalanceAVL(self, node):
 		# INPUT: A node, v, where an imbalance may have occured in an AVL tree T
 		# OUTPUT: An update of T to now be balanced 
+
 		# v.height <= 1 + max(v.leftChild().height, v.rightChild.height())
+		node.height = 1 + max(node.left.height, node.right.height)
+
 		# while v is not the root of T do
+		while (node != self.root)
 			# v <= v.parent()
-			# if |v.leftChild.height() - v.rightChild.height| > 1 then 
-				# Let y be the tallest child of v and let x be the tallest child of y
+			node = node.parent
+
+			# if |v.leftChild.height() - v.rightChild.height| > 1 then
+			if  (abs(node.left.height - node.right.height) > 1):
+				# Let y be the tallest child of v 
+				if (node.left.height > node.right.height):
+					y = node.left
+				else:
+					y = node.right
+				
+				# and let x be the tallest child of y
+				if (y.left.height > y.right.height):
+					x = node.left
+				else:
+					x = node.right 
+
 				# v <= restructure(x) (trinode restructure operation)
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
+			node.height = 1 + max(node.left.height, node.right.height)
 		return
 
 	# inserts node into AVL tree (iterative)
 	def insertIter(self, key):
 		# didnt add val yet because might not need it, just working with integers
 		# they can be the key and the value
+
 		# INPUT: a key-element pair, (key, val) and an AVL tree, self
 		# OUTPUT: an update of T to now contain the item (key, val)
 
 		# v <= IterativeTreeSearch(key, Tree (self)) V IS NOT VALUE 
+		currNode = self.searchIter(key)
+
 		# if v is not an external node then
+		if (currNode.height != 0): # I think height = 0 means external 
 			# return "An item with key k is already in T"
-		# Exapnd v into an internal node with two external-node children
-		# v.key <= key 
+			print("key %d is already in the AVL tree"% (key))
+			return
+
+		# Exapnd v into an internal node with two external-node children	
+		currNode.key = key # v.key <= key  
 		# v.value <= val 
-		# v.height <= 1
+		currNode.height = 1 # v.height <= 1
+
 		# rebalanceAVL(val, Tree)
 		return 
 
@@ -69,5 +96,13 @@ class AVL:
 				currNode = currNode.right # curr <= curr.right 
 		
 		return currNode 
+
+	# rotate subtree's root's left child to become new root of subtree
+	# old root is man the new root's right child
+	def rightRotate(self, node):
+		oldRoot = node
+		node = node.left
+		node.right = oldRoot
+		return node
 
 
