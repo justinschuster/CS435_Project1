@@ -255,6 +255,19 @@ def getRandomArray(n) -> []:
 
 	return arr
 
+# outputs array of size n were arr[0] = n, a[1] = n-1,...
+def getSortedArray(n):
+	# create vars 
+	totalSize = n
+	arr = []
+
+	count = 0
+	while (count < totalSize): # loop n times 
+		arr.append(n - count) #a[0] = n - 0, a[count] = n - count 
+		count = count + 1
+
+	return arr 
+
 	
 def main() -> None:
 	#treeNodes = [5, 4, 7, 1, 9]
@@ -265,7 +278,7 @@ def main() -> None:
 
 	#TestMethods.testInsert(currTree.root)
 
-	arr = getRandomArray(10)
+	arr = getSortedArray(10)
 	for num in arr:
 		print(num)
 
