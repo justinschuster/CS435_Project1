@@ -5,20 +5,26 @@
 
 from BST import BST
 from Node import Node
+from testing import TestMethods
+import unittest 
 
-# helper function to print out preorder traversal for testing
-def printPreorder(root: Node, visited: []) -> None:
-	if root is None or root.data is None:
-		return
-
-	print(root.data)
-	visited.append(root.data)
-
-	if (root.left is not None and root.right not in visited):
-		printPreorder(root.left, visited)
-	if (root.right is not None and root.right not in visited):	
-		printPreorder(root.right, visited)
-	return 
+# inserts Node into BST (recursive version)
+def insertRec(root, data):
+	if  root is None: # base case 
+		root = Node(data)
+	elif root.data is None:
+		root.data = data
+	else:
+		if data == root.data:
+			root.data = data 
+		elif data < root.data: # smaller number to left child	
+			if root.left is None:
+				root.left = Node()
+			insertRec(root.left, data)	
+		else: # larger number to the right
+			if root.right is None:
+				root.right = Node()
+			insertRec(root.right, data)
 
 # deletes Node in BST recursively
 def deleteRec(root, data):
@@ -118,28 +124,131 @@ def findPrevIter(root, data):
 
 	return prevNode
 
+# finds the minimum Node value in the subtree (recursive)
+def findMinRec(currNode):
+	if currNode.left is None:
+		return currNode 
+	else:
+		return currNode.left.findMinRec()
 
+# finds the max Node value in the subtree (recursive)
+def findMaxRec(currNode):
+	if currNode.right is None:
+		return currNode
+	else:
+		return currNode.right.findMaxRec()
+
+# finds the minimum Node value in the subtree (recursive)
+def findMinRec(currNode):
+	if currNode.left is None:
+		return currNode 
+	else:
+		return currNode.left.findMinRec()
+
+# finds the max Node value in the subtree (recursive)
+def findMaxRec(currNode):
+	if currNode.right is None:
+		return currNode
+	else:
+		return currNode.right.findMaxRec()
+
+	
+# finds the minimum Node value in the subtree
+def findMinIter(currNode):
+	# while left child of current node is not null
+	while currNode.left is not None:
+		# currNode = left child 
+		currNode = currNode.left
+	# return the currNode when we have no more left children
+	return currNode
+
+# finds the maximum Node value in the sub tree
+def findMaxIter(currNode):
+	# while right child isnt null
+	while currNode.right is not None:
+		# currNode = right child
+		currNode = currNode.right
+	# return the currNode when have have no more right children
+	return currNode	
+
+# inserts Node into BST (iterative version)
+def insertIter(root, data: int) -> None:
+	# Set currNode = root
+	currNode = root 
+	prevRight = None
+	prevLeft = None
+
+	# while currNode isn't null
+	while (currNode != None):
+		# if currData = data
+		if (data == currNode.data or currNode.data is None):	
+			currNode.data = data
+			return
+
+		# if data < currData 
+		if (data < currNode.data):
+			# currNode = left child of currnode 
+			prevRight = None 
+			prevLeft = currNode
+			currNode = currNode.left	
+		# if data > currData
+		elif (data > currNode.data):
+			prevLeft = None
+			prevRight = currNode
+			currNode = currNode.right
+
+	currNode = Node(data)
+	if (prevRight):
+		prevRight.right = currNode
+	elif (prevLeft):
+		prevLeft.left = currNode
+
+
+# deletes Node from BST (iterative version)
+def deleteIter(root, deleteValue: int) -> None:
+	prevNode = None # set prevNode = none
+	currNode =  root # set currNode = root 
+
+	# if root is null
+	if  currNode is None:
+		# return 
+		return
+
+	# while currNode is not null
+	while currNode is not None:
+		# if currNode value is equal to the value we want to delete -> delete
+		if (currNode.data == deleteValue == prevNode.left.data):
+			# node to delete has no children
+			if (currNode.right == currNode.left == None):
+				prevNode.left = None
+				break
+			# node to delete only has right child
+			elif (currNode.right is not None and currNode.left is None):
+				prevNode.left = currNode.right
+				break
+			elif (currNode.right is None and currNode is not None):
+				prevNode.left = currNode.left
+				break
+
+		prevNode = currNode # prevNode = current node  
+		# if delete value is less that data of current
+		if (currNode.data > deleteValue):
+			# make currNode into currNode's left child
+			currNode = currNode.left
+		# otherwise make currNode into currNodes right child
+		else:
+			currNode = currNode.right 
+	return
+	
 def main() -> None:
+	treeNodes = [5, 4, 7, 1, 9]
+
 	currTree = BST()
-	currTree.insertRec(15)	
-	currTree.insertRec(10)
-	currTree.insertRec(8)
-	currTree.insertRec(12)
-	currTree.insertRec(20)
-	currTree.insertRec(16)
-	currTree.insertRec(25)
+	for n in treeNodes:
+		insertRec(currTree.root, n)
 
-	print(findNextIter(currTree.root, 10).data)
+	TestMethods.testInsert(currTree.root)
 
-	#deleteRec(currTree.root, 4)
-
-	#currTree.deleteIter(2)
-	#currTree.insertIter(1)
-
-
-	print("\nPreorder Traversal:")
-	visited = []
-	printPreorder(currTree.root, visited)
 
 if __name__ == "__main__":
 	main()
