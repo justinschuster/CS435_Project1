@@ -59,6 +59,7 @@ class AVL:
 		currNode.height = 1 # v.height <= 1
 
 		# rebalanceAVL(val, Tree)
+		self.rebalanceAVL(key)
 		return 
 
 	# removes node from AVL tree 
@@ -96,6 +97,13 @@ class AVL:
 				currNode = currNode.right # curr <= curr.right 
 		
 		return currNode 
+
+	# opposite direction of right rotate
+	def leftRotate(self, node):
+		oldRoot = node
+		node = node.right
+		node = oldRoot
+		return node
 
 	# rotate subtree's root's left child to become new root of subtree
 	# old root is man the new root's right child
