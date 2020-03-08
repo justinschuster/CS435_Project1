@@ -3,6 +3,8 @@ import Node
 class AVL:
 	def __init__(self):
 		self.root = Node.Node()
+		self.root.left = Node.Node()
+		self.root.right = Node.Node()
 
 	# rebalance at a node violating the rank rule
 	def rebalanceAVL(self, node):
@@ -19,28 +21,33 @@ class AVL:
 			# v <= v.parent()
 			node = node.parent
 
-			# if |v.leftChild.height() - v.rightChild.height| > 1 then
-			if  (abs(node.left.height - node.right.height) > 1):
-				# Let y be the tallest child of v 
-				if (node.left.height > node.right.height):
-					y = node.left
-				else:
-					y = node.right
-				
-				# and let x be the tallest child of y
-				if (y.left.height > y.right.height):
-					x = node.left
-				else:
-					x = node.right 
+			if node is None:
+				return 
 
-				# v <= restructure(x) (trinode restructure operation)
-				if ((x.left.height - x.right.height) > 1):
-					node = self.rightRotate(x)
-				elif ((x.right.height - x.left.height) > 1):
-					node = self.leftRotate(x)
+			# if |v.leftChild.height() - v.rightChild.height| > 1 then
+			if node.left is not None and node.right is not None:
+				if  (abs(node.left.height - node.right.height) > 1):
+					# Let y be the tallest child of v 
+					if (node.left.height > node.right.height):
+						y = node.left
+					else:
+						y = node.right
+					
+					# and let x be the tallest child of y
+					if (y.left.height > y.right.height):
+						x = node.left
+					else:
+						x = node.right 
+
+					# v <= restructure(x) (trinode restructure operation)
+					if ((x.left.height - x.right.height) > 1):
+						node = self.rightRotate(x)
+					elif ((x.right.height - x.left.height) > 1):
+						node = self.leftRotate(x)
 
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
 			node.height = 1 + max(node.left.height, node.right.height)
+
 		return
 
 	# inserts node into AVL tree (iterative)
@@ -52,10 +59,10 @@ class AVL:
 		# OUTPUT: an update of T to now contain the item (key, val)
 
 		# v <= IterativeTreeSearch(key, Tree (self)) V IS NOT VALUE 
-		currNode = self.searchIter(key)
+		currNode = self.searchIter(key)	
 
 		# if v is not an external node then
-		if (currNode.height != 0): # I think height = 0 means external 
+		if (currNode.height != 1): # I think height = 0 means external 
 			# return "An item with key k is already in T"
 			print("key %d is already in the AVL tree"% (key))
 			return
@@ -67,6 +74,7 @@ class AVL:
 
 		# rebalanceAVL(val, Tree)
 		self.rebalanceAVL(currNode)
+		
 		return 
 
 	# removes node from AVL tree 
@@ -97,6 +105,8 @@ class AVL:
 			# base case 
 			if currNode.key is None:
 				currNode.key = key
+				currNode.height = 1 # always expand exterior nodes
+				print("Inserted %d"% (key))
 				return currNode 
 
 			# (if) check the key with node key 
@@ -108,8 +118,13 @@ class AVL:
 				currNode = currNode.left
 			else: # if greater
 				currNode = currNode.right # curr <= curr.right 
-		
-		return currNode 
+
+		currNode = Node.Node(key)
+		currNode.height = 1
+		currNode.left = Node.Node()
+		currNode.right = Node.Node()
+
+		return currNode
 
 	# opposite direction of right rotate
 	def leftRotate(self, node):
