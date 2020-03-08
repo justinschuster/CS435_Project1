@@ -15,6 +15,7 @@ class AVL:
 				# Let y be the tallest child of v and let x be the tallest child of y
 				# v <= restructure(x) (trinode restructure operation)
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
+		return
 
 	# inserts node into AVL tree (iterative)
 	def insertIter(self, key):
@@ -31,6 +32,7 @@ class AVL:
 		# v.value <= val 
 		# v.height <= 1
 		# rebalanceAVL(val, Tree)
+		return 
 
 	# removes node from AVL tree 
 	def deleteIter(self, key):
@@ -46,3 +48,26 @@ class AVL:
 		# Let w be v's smallest-height child
 		# Remove w and v from T, replacing v with w's sibling, z
 		# rebalanceAVL(z, T)
+		return 
+
+	# searches AVL Tree self for the key then returns that node 
+	# TODO: TEST THIS SHIT 
+	def searchIter(self, key) -> Node:
+		# get currentNode
+		currNode = self.root
+
+		# while currNode != Null
+		while currNode is not None:
+			# (if) check the key with node key 
+			if (currNode.key == key):
+				# return the node if they're the same
+				return currNode	
+			elif currNode.key > key: # if key to insert is left than node key 
+				# currNode <= curr.left
+				currNode = currNode.left
+			else: # if greater
+				currNode = currNode.right # curr <= curr.right 
+		
+		return currNode 
+
+
