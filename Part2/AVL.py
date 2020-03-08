@@ -10,10 +10,12 @@ class AVL:
 		# OUTPUT: An update of T to now be balanced 
 
 		# v.height <= 1 + max(v.leftChild().height, v.rightChild.height())
-		node.height = 1 + max(node.left.height, node.right.height)
+		if node.left is not None and node.right is not None: 
+		# TODO: Don't think this is completely right 
+			node.height = 1 + max(node.left.height, node.right.height)
 
 		# while v is not the root of T do
-		while (node != self.root)
+		while (node != self.root):
 			# v <= v.parent()
 			node = node.parent
 
@@ -32,6 +34,11 @@ class AVL:
 					x = node.right 
 
 				# v <= restructure(x) (trinode restructure operation)
+				if ((x.left.height - x.right.height) > 1):
+					node = self.rightRotate(x)
+				elif ((x.right.height - x.left.height) > 1):
+					node = self.leftRotate(x)
+
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
 			node.height = 1 + max(node.left.height, node.right.height)
 		return
@@ -59,7 +66,7 @@ class AVL:
 		currNode.height = 1 # v.height <= 1
 
 		# rebalanceAVL(val, Tree)
-		self.rebalanceAVL(key)
+		self.rebalanceAVL(currNode)
 		return 
 
 	# removes node from AVL tree 
@@ -86,11 +93,17 @@ class AVL:
 
 		# while currNode != Null
 		while currNode is not None:
+
+			# base case 
+			if currNode.key is None:
+				currNode.key = key
+				return currNode 
+
 			# (if) check the key with node key 
 			if (currNode.key == key):
 				# return the node if they're the same
 				return currNode	
-			elif currNode.key > key: # if key to insert is left than node key 
+			elif (currNode.key > key): # if key to insert is left than node key 
 				# currNode <= curr.left
 				currNode = currNode.left
 			else: # if greater
