@@ -40,13 +40,15 @@ class AVL:
 						x = node.right 
 
 					# v <= restructure(x) (trinode restructure operation)
-					if ((x.left.height - x.right.height) > 1):
-						node = self.rightRotate(x)
-					elif ((x.right.height - x.left.height) > 1):
-						node = self.leftRotate(x)
+					if x.left is not None and x.right is not None: # need to find correct answer for 1 
+						if ((x.left.height - x.right.height) > 1):
+							node = self.rightRotate(x)
+						elif ((x.right.height - x.left.height) > 1):
+							node = self.leftRotate(x)
 
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
-			node.height = 1 + max(node.left.height, node.right.height)
+			if node.left is not None and node.right is not None:
+				node.height = 1 + max(node.left.height, node.right.height)
 
 		return
 
@@ -74,7 +76,7 @@ class AVL:
 
 		# rebalanceAVL(val, Tree)
 		self.rebalanceAVL(currNode)
-		
+
 		return 
 
 	# removes node from AVL tree 
@@ -96,17 +98,29 @@ class AVL:
 	# searches AVL Tree self for the key then returns that node 
 	# TODO: TEST THIS SHIT 
 	def searchIter(self, key) -> Node:
+		print("Inserting: %d"% (key))
 		# get currentNode
 		currNode = self.root
+		parent = None 
 
 		# while currNode != Null
 		while currNode is not None:
+		#	if currNode.key is not None:
+		#		print("currNode.key: %d"% (currNode.key))
+		#	else:
+		#		print("currNode.key is null")
+
+		#	if parent is not None:
+		#		print("parent.key: %d"% (parent.key))
+		#	else:
+		#		print("parent is null")
 
 			# base case 
 			if currNode.key is None:
 				currNode.key = key
 				currNode.height = 1 # always expand exterior nodes
-				print("Inserted %d"% (key))
+				currNode.parent = parent
+		#		print("Inserted %d"% (key))
 				return currNode 
 
 			# (if) check the key with node key 
@@ -115,12 +129,45 @@ class AVL:
 				return currNode	
 			elif (currNode.key > key): # if key to insert is left than node key 
 				# currNode <= curr.left
-				currNode = currNode.left
+				parent = currNode
+				currNode = currNode.left 
+				parent.left = currNode
 			else: # if greater
-				currNode = currNode.right # curr <= curr.right 
+				parent = currNode
+				currNode = currNode.right # curr <= curr.right  
+				parent.right = currNode
 
-		currNode = Node.Node(key)
-		currNode.height = 1
+			print()
+
+		#print("currNode is null")
+		#if parent is not None:
+		#	if parent.key is not None:
+		#		print("parent.key: %d"% (parent.key))
+		#	else:
+		#		print("parent.key is null")
+
+		#	if parent.left is not None and parent.left.key is not None:	
+		#		print("parent.left: %d"% (parent.left.key))
+		#	elif parent.right is not None and parent.right.key is not None:
+		#		print("parent.right: %d"% (parent.right.key))
+		#	else:
+		#		print("Parent has no children")
+		#else:
+		#	print("parent is null")
+
+		# create the new node
+		currNode = Node.Node(key, 1, parent)
+		currNode.left = Node.Node()
+		currNode.right = Node.Node()
+
+		# assign our new node to the proper child of the parent node
+		if parent is not None and parent.key is not None:
+			if currNode.key < parent.key:
+				parent.left = currNode
+			elif currNode.key > parent.key:
+				parent.right = currNode
+
+		currNode = Node.Node(key, 1, parent)
 		currNode.left = Node.Node()
 		currNode.right = Node.Node()
 
