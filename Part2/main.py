@@ -11,8 +11,11 @@ def main() -> None:
 	for n in nodes:
 		tree.insertIter(n)
 
-	print()
+	print("\nInorder Traversal:", end=" ")
 	testing.printInorder(tree.root)
+	print()
+
+	print(str(testing.isValidAVL(tree.root)))
 
 if __name__=="__main__":
 	main()

@@ -49,6 +49,10 @@ class AVL:
 			# v.height <= 1 + max(v.leftChild.height, v.rightChild.height)
 			if node.left is not None and node.right is not None:
 				node.height = 1 + max(node.left.height, node.right.height)
+			elif node.left is not None:
+				node.height = 1 + node.left.height
+			elif node.right is not None:
+				node.height = 1 + node.right.height
 
 		return
 
