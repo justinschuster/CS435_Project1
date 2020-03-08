@@ -6,7 +6,7 @@
 from BST import BST
 from Node import Node
 from testing import TestMethods
-import unittest 
+import random 
 
 # inserts Node into BST (recursive version)
 def insertRec(root, data):
@@ -239,15 +239,35 @@ def deleteIter(root, deleteValue: int) -> None:
 		else:
 			currNode = currNode.right 
 	return
+
+# creates an array of size n that contains distinct random numbers
+def getRandomArray(n) -> []:
+	# count and array 
+	arr = [] 
+	count = 0
+
+	# loop n times, only iterate count if we insert number 
+	while (count < n):
+		newNum = random.randint(0, 200)	
+		if arr.count(newNum) == 0:
+			arr.append(newNum)	
+			count = count + 1
+
+	return arr
+
 	
 def main() -> None:
-	treeNodes = [5, 4, 7, 1, 9]
+	#treeNodes = [5, 4, 7, 1, 9]
 
-	currTree = BST()
-	for n in treeNodes:
-		insertRec(currTree.root, n)
+	#currTree = BST()
+	#for n in treeNodes:
+		#insertRec(currTree.root, n)
 
-	TestMethods.testInsert(currTree.root)
+	#TestMethods.testInsert(currTree.root)
+
+	arr = getRandomArray(10)
+	for num in arr:
+		print(num)
 
 
 if __name__ == "__main__":
