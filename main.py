@@ -3,86 +3,9 @@
 #	Project 1
 #	BST methods implementation
 
-from BST import BST
-from Node import Node
-from testing import TestMethods
+from bst import BST
+from node import Node
 import random 
-
-# inserts Node into BST (recursive version)
-def insertRec(root, data):
-	if  root is None: # base case 
-		root = Node(data)
-	elif root.data is None:
-		root.data = data
-	else:
-		if data == root.data:
-			root.data = data 
-		elif data < root.data: # smaller number to left child	
-			if root.left is None:
-				root.left = Node()
-			insertRec(root.left, data)	
-		else: # larger number to the right
-			if root.right is None:
-				root.right = Node()
-			insertRec(root.right, data)
-
-# deletes Node in BST recursively
-def deleteRec(root, data):
-	if data < root.data:
-		print("going left")
-		root.left = deleteRec(root.left, data)	
-	elif data > root.data:
-		root.right = deleteRec(root.right, data)
-	elif data == root.data:
-		if root.left is None and root.right is None: # Node to delete is a leaf
-			root = None
-			return root
-		elif root.left is not None and root.right is None: # 1 child
-			childNode = root.left
-			root = childNode
-			return root
-		elif root.left is None and root.right is not None: # only right child exits
-			childNode = root.right
-			root = childNode
-			return root
-
-		temp = root.right.findMinRec() 
-		root.data = temp.data
-		root.right = deleteRec(root.right, temp.data)
-
-	return root
-
-# finds the next node inorder
-def findNextRec(root, data, prevNode=None):
-	if root is None:
-		return None
-
-	if root.data == data:
-		if root.right is not None:
-			return root.right.findMinRec()
-	elif data < root.data:
-		prevNode = root
-		return findNextRec(root.left, data, prevNode)
-	else:
-		return findNextRec(root.right, data, prevNode)
-
-	return prevNode
-
-# finds the previous node inorder (recursive)
-def findPrevRec(root, data, prevNode=None):
-	if root is None:
-		return prevNode
-
-	if data == root.data:
-		if root.left is not None:
-			return root.left.findMaxRec()
-	elif data < root.data:
-		return findPrevRec(root.left, data, prevNode)
-	else:
-		prevNode = root
-		return findPrevRec(root.right, data, prevNode)
-
-	return prevNode
 
 # finds next node inorder (iterative)
 def findNextIter(root, data):
@@ -123,35 +46,6 @@ def findPrevIter(root, data):
 			return None
 
 	return prevNode
-
-# finds the minimum Node value in the subtree (recursive)
-def findMinRec(currNode):
-	if currNode.left is None:
-		return currNode 
-	else:
-		return currNode.left.findMinRec()
-
-# finds the max Node value in the subtree (recursive)
-def findMaxRec(currNode):
-	if currNode.right is None:
-		return currNode
-	else:
-		return currNode.right.findMaxRec()
-
-# finds the minimum Node value in the subtree (recursive)
-def findMinRec(currNode):
-	if currNode.left is None:
-		return currNode 
-	else:
-		return currNode.left.findMinRec()
-
-# finds the max Node value in the subtree (recursive)
-def findMaxRec(currNode):
-	if currNode.right is None:
-		return currNode
-	else:
-		return currNode.right.findMaxRec()
-
 	
 # finds the minimum Node value in the subtree
 def findMinIter(currNode):
@@ -270,17 +164,17 @@ def getSortedArray(n):
 
 	
 def main() -> None:
-	#treeNodes = [5, 4, 7, 1, 9]
+	treeNodes = [5, 4, 7, 1, 9]
 
-	#currTree = BST()
-	#for n in treeNodes:
-		#insertRec(currTree.root, n)
+	currTree = BST()
+	for n in treeNodes:
+		currTree.insertRec(currTree.root, n)
 
 	#TestMethods.testInsert(currTree.root)
 
-	arr = getSortedArray(10)
-	for num in arr:
-		print(num)
+	#arr = getSortedArray(10)
+	#for num in arr:
+	#	print(num)
 
 
 if __name__ == "__main__":
